@@ -1,3 +1,5 @@
+using InterviewDemo.Extensions;
+
 namespace InterviewDemo
 {
     public class Program
@@ -8,6 +10,8 @@ namespace InterviewDemo
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.RegisterContainers();
+
 
             var app = builder.Build();
 

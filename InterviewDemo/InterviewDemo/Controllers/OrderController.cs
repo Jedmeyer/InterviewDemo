@@ -1,6 +1,7 @@
 ﻿using AutoBogus;
 using InterviewDemo.Models;
 using InterviewDemo.Pages;
+using InterviewDemo.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,17 @@ namespace InterviewDemo.Controllers
 {
     public class OrderController : Controller
     {
-        public OrderController()
+        private readonly OrderService _orderService;
+        public OrderController(OrderService _service)
         {
-
+            _orderService = _service;
         }
 
         [HttpGet]
         [Route("Order/Index")]
-        public IActionResult Index([FromQuery] int page)
+        public IActionResult Index([FromQuery] int orderId)
         {
-            var orders = AutoFaker.Generate<OrderModel>(10);
-
-            return Ok(orders);
+            return Ok(_orderService.GetOrderById(orderId));
         }
     }
 }
